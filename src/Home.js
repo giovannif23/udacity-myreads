@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/organisms/Header'
+import BooksGrid from './components/molecules/BooksGrid'
 import Bookshelf from './components/molecules/Bookshelf'
 import BookChanger from './components/atoms/BookChanger'
 import Title from './components/atoms/Title'
@@ -14,7 +15,7 @@ class Home extends Component {
         <div className="list-books-content">
           <div>
             <Bookshelf title="Currently Reading">
-              <ol className="books-grid">
+              <BooksGrid>
                 <li>
                   <div className="book">
                     <div className="book-top">
@@ -35,7 +36,7 @@ class Home extends Component {
                     <div className="book-authors">Orson Scott Card</div>
                   </div>
                 </li>
-              </ol>
+              </BooksGrid>
             </Bookshelf>
             <Bookshelf title="Want to Read">
               <ol className="books-grid">
