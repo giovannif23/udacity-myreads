@@ -19,11 +19,16 @@ const BooksGridWrap = styled.ol`
 
 class BooksGrid extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    filter: PropTypes.string
   }
 
   render() {
-    const { books } = this.props
+    let { books, filter } = this.props
+
+    if (filter) {
+      books = books.filter((book) => book.shelf === filter)
+    }
 
     return(
       <BooksGridWrap>
