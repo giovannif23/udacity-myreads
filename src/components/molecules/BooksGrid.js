@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import BookChanger from '../atoms/BookChanger'
+import PropTypes from 'prop-types'
+import Book from './Book'
 
 const BooksGridWrap = styled.ol`
   display: flex;
@@ -16,12 +17,22 @@ const BooksGridWrap = styled.ol`
   }
 `
 
-function BooksGrid(props) {
-  return(
-    <BooksGridWrap>
-      {props.children}
-    </BooksGridWrap>
-  )
+class BooksGrid extends Component {
+  static propTypes = {
+    books: PropTypes.array.isRequired
+  }
+
+  render() {
+    const { books } = this.props
+
+    return(
+      <BooksGridWrap>
+        {books.map((book, index) => (
+          <Book book={book}></Book>
+        ))}
+      </BooksGridWrap>
+    )
+  }
 }
 
 export default BooksGrid
