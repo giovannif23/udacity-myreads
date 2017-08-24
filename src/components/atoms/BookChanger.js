@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { rgba, darken } from 'polished'
+import * as BooksAPI from '../../BooksAPI'
 
 import arrow from '../../icons/arrow-drop-down.svg'
 
@@ -33,18 +35,41 @@ const BookChangerWrap = styled.div`
   }
 `
 
-function BookChanger() {
-  return(
-    <BookChangerWrap>
-      <select>
-        <option value="none" disabled>Move to...</option>
-        <option value="currentlyReading">Currently Reading</option>
-        <option value="wantToRead">Want to Read</option>
-        <option value="read">Read</option>
-        <option value="none">None</option>
-      </select>
-    </BookChangerWrap>
-  )
+class BookChanger extends Component {
+  state = {
+    value: ''
+  }
+
+  static propTypes = {
+    book: PropTypes.object.isRequired
+  }
+
+  componentDidMount() {
+    this.setState({ value: this.props.book.shelf })
+  }
+
+  changeHandler(book, shelf) {
+    BooksAPI.update(book, shelf)
+      .then((res) => {
+        // need to update the view
+      })
+  }
+
+  render() {
+    const { book } = this.props
+
+    return(
+      <BookChangerWrap>
+        <select value={this.state.value} onChange={(event) => this.changeHandler(book, event.target.value)}>
+          <option value="none" disabled>Move to...</option>
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
+          <option value="none">None</option>
+        </select>
+      </BookChangerWrap>
+    )
+  }
 }
 
 export default BookChanger

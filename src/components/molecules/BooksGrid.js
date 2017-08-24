@@ -33,7 +33,7 @@ class BooksGrid extends Component {
     return(
       <BooksGridWrap>
         {books.map((book, index) => (
-          <Book book={book}></Book>
+          <Book key={index} book={book}></Book>
         ))}
       </BooksGridWrap>
     )

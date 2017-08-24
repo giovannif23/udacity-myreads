@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import BooksGrid from './components/molecules/BooksGrid'
-import Book from './components/molecules/Book'
 import * as BooksAPI from './BooksAPI'
 
 class SearchPage extends Component {
