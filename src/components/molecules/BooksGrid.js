@@ -23,8 +23,14 @@ class BooksGrid extends Component {
     filter: PropTypes.string
   }
 
+  componentWillReceiveProps(books) {
+    console.log('nextProps', books);
+  }
+
   render() {
     let { books, filter } = this.props
+
+    console.log('books', books);
 
     if (filter) {
       books = books.filter((book) => book.shelf === filter)

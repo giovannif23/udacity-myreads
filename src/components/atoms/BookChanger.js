@@ -45,12 +45,15 @@ class BookChanger extends Component {
   }
 
   componentDidMount() {
-    this.setState({ value: this.props.book.shelf })
+    if (this.props.book.shelf) {
+      this.setState({ value: this.props.book.shelf })
+    }
   }
 
   changeHandler(book, shelf) {
     BooksAPI.update(book, shelf)
       .then((res) => {
+        console.log('changeHandler', res);
         // need to update the view
       })
   }
