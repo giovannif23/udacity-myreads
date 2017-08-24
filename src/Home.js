@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
 import Header from './components/organisms/Header'
 import BooksGrid from './components/molecules/BooksGrid'
 import Bookshelf from './components/molecules/Bookshelf'
 import BookChanger from './components/atoms/BookChanger'
+import OpenSearch from './components/atoms/OpenSearch'
 import Title from './components/atoms/Title'
 
 class Home extends Component {
@@ -41,9 +41,7 @@ class Home extends Component {
             </Bookshelf>
           </div>
         </div>
-        <div className="open-search">
-          <Link to="/search">Add a book</Link>
-        </div>
+        <OpenSearch/>
       </div>
     )
   }

@@ -15,25 +15,6 @@
   border-bottom: 1px solid #dedede;
 }
 
-.open-search {
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
-}
-.open-search a {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: royalblue;
-  background-image: url('./icons/add.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
-  box-shadow: 0 0 0 7px rgba(0,0,0,.1), 0 0 10px rgba(0,0,0,.3);
-  font-size: 0;
-}
-
 /* search page */
 
 .search-books-bar {
