@@ -11,7 +11,7 @@ class SearchPage extends Component {
 
   updateQuery = (query) => {
     this.setState({
-      query: query.trim(),
+      query: query,
       books: []
     })
 
@@ -28,8 +28,6 @@ class SearchPage extends Component {
   render() {
     const { books, query } = this.state
 
-    console.log('SearchPage books', books);
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -44,7 +42,7 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BooksGrid books={books}></BooksGrid>
+          <BooksGrid showShelf={true} books={books}></BooksGrid>
         </div>
       </div>
     )
