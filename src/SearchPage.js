@@ -25,10 +25,6 @@ class SearchPage extends Component {
     }
   }
 
-  clearQuery = () => {
-    this.setState({ query: '' })
-  }
-
   render() {
     const { books, query } = this.state
 
