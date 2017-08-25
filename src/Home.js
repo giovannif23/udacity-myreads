@@ -19,7 +19,6 @@ class Home extends Component {
 
   refreshBooks = () => {
     BooksAPI.getAll().then((books) => {
-      console.log('refreshBooks BooksAPI', books);
       this.setState((prevState, props) => {
         return {books}
       })
@@ -28,7 +27,6 @@ class Home extends Component {
 
   render() {
     const { books } = this.state
-    console.log('books', books);
 
     return (
       <div className="list-books">

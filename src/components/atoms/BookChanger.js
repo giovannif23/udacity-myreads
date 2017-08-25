@@ -61,7 +61,6 @@ class BookChanger extends Component {
   changeHandler(book, shelf) {
     BooksAPI.update(book, shelf)
       .then((res) => {
-        console.log('res', res);
         this.setState({ shelf })
       })
       .then(() => {
