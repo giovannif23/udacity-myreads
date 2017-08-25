@@ -17,13 +17,12 @@ class Home extends Component {
     })
   }
 
-  // refreshShelf = (boosk) => {
-  //   this.setState((state) => ({
-  //     contacts: state.contacts.filter((c) => c.id !== contact.id)
-  //   }))
-  //
-  //   ContactsAPI.remove(contact)
-  // }
+  refreshBooks = () => {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: [] })
+      this.setState({ books })
+    })
+  }
 
   render() {
     const { books } = this.state
@@ -36,13 +35,13 @@ class Home extends Component {
         <div className="list-books-content">
           <div>
             <Bookshelf title="Currently Reading">
-              <BooksGrid books={books} filter="currentlyReading"/>
+              <BooksGrid onSelect={this.refreshBooks} books={books} filter="currentlyReading"/>
             </Bookshelf>
             <Bookshelf title="Want to Read">
-              <BooksGrid books={books} filter="wantToRead"/>
+              <BooksGrid onSelect={this.refreshBooks} books={books} filter="wantToRead"/>
             </Bookshelf>
             <Bookshelf title="Read">
-              <BooksGrid books={books} filter="read"/>
+              <BooksGrid onSelect={this.refreshBooks} books={books} filter="read"/>
             </Bookshelf>
           </div>
         </div>

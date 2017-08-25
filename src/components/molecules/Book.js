@@ -11,7 +11,8 @@ class Book extends Component {
   }
 
   static propTypes = {
-    book: PropTypes.object.isRequired
+    book: PropTypes.object.isRequired,
+    onSelect: PropTypes.func
   }
 
   componentDidMount() {
@@ -25,7 +26,7 @@ class Book extends Component {
   }
 
   render() {
-    const { book } = this.props
+    const { book, onSelect } = this.props
     const { thumbnail } = this.state
 
     return(
@@ -33,7 +34,7 @@ class Book extends Component {
         <div className="book">
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail ? thumbnail : ''})` }}></div>
-            <BookChanger book={book} />
+            <BookChanger onSelect={onSelect} book={book} />
           </div>
           <div className="book-title">{book.title}</div>
           <div className="book-authors">{book.authors}</div>

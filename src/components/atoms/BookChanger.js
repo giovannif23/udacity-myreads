@@ -37,24 +37,32 @@ const BookChangerWrap = styled.div`
 
 class BookChanger extends Component {
   state = {
+    book: '',
     shelf: ''
   }
 
   static propTypes = {
-    book: PropTypes.object.isRequired
+    book: PropTypes.object.isRequired,
+    onSelect: PropTypes.func
   }
 
   componentDidMount() {
-    if (this.props.book.shelf) {
-      this.setState({ shelf: this.props.book.shelf })
+    if (this.props.book) {
+      this.setState({
+        book: this.props.book,
+        shelf: this.props.book.shelf
+      })
     }
   }
 
   changeHandler(book, shelf) {
+    this.props.onSelect(shelf)
     BooksAPI.update(book, shelf)
       .then((res) => {
-        console.log('changeHandler', res);
-        // need to update the view
+        this.setState({
+          book: book,
+          shelf: shelf
+        })
       })
   }
 

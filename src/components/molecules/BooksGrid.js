@@ -20,11 +20,12 @@ const BooksGridWrap = styled.ol`
 class BooksGrid extends Component {
   static propTypes = {
     books: PropTypes.array,
-    filter: PropTypes.string
+    filter: PropTypes.string,
+    onSelect: PropTypes.func
   }
 
   render() {
-    let { books, filter } = this.props
+    let { books, filter, onSelect } = this.props
 
     if (filter) {
       books = books.filter((book) => book.shelf === filter)
@@ -33,7 +34,7 @@ class BooksGrid extends Component {
     return(
       <BooksGridWrap>
         {books.map((book, index) => (
-          <Book key={index} book={book}></Book>
+          <Book onSelect={onSelect} key={index} book={book}></Book>
         ))}
       </BooksGridWrap>
     )
