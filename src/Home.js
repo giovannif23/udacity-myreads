@@ -12,11 +12,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // TODO: see if this needs to be initialized
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
+
+  // refreshShelf = (boosk) => {
+  //   this.setState((state) => ({
+  //     contacts: state.contacts.filter((c) => c.id !== contact.id)
+  //   }))
+  //
+  //   ContactsAPI.remove(contact)
+  // }
 
   render() {
     const { books } = this.state

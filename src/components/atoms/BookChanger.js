@@ -37,7 +37,7 @@ const BookChangerWrap = styled.div`
 
 class BookChanger extends Component {
   state = {
-    value: ''
+    shelf: ''
   }
 
   static propTypes = {
@@ -46,7 +46,7 @@ class BookChanger extends Component {
 
   componentDidMount() {
     if (this.props.book.shelf) {
-      this.setState({ value: this.props.book.shelf })
+      this.setState({ shelf: this.props.book.shelf })
     }
   }
 
@@ -60,10 +60,11 @@ class BookChanger extends Component {
 
   render() {
     const { book } = this.props
+    const { shelf } = this.state
 
     return(
       <BookChangerWrap>
-        <select value={this.state.value} onChange={(event) => this.changeHandler(book, event.target.value)}>
+        <select value={shelf} onChange={(event) => this.changeHandler(book, event.target.value)}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>

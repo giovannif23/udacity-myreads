@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import BookChanger from '../atoms/BookChanger'
 
 class Book extends Component {
+  state = {
+    book: {
+      shelf: ''
+    }
+  }
+
   static propTypes = {
     book: PropTypes.object.isRequired
   }

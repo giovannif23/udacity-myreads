@@ -9,19 +9,20 @@ class SearchPage extends Component {
     books: []
   }
 
-  componentDidMount() {
-    // TODO: see if this needs to be initialized
-    // BooksAPI.getAll().then((books) => {
-    //   this.setState({ books })
-    // })
-  }
-
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-
-    BooksAPI.search(query).then((books) => {
-      this.setState({ books })
+    this.setState({
+      query: query.trim(),
+      books: []
     })
+
+    if (query) {
+      BooksAPI.search(query)
+      .then((books) => {
+        if (!books.items) {
+          this.setState({ books })
+        }
+      })
+    }
   }
 
   clearQuery = () => {
