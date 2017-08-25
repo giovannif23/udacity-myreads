@@ -28,6 +28,8 @@ class SearchPage extends Component {
   render() {
     const { books, query } = this.state
 
+    console.log('SearchPage books', books);
+
     return (
       <div className="search-books">
         <div className="search-books-bar">

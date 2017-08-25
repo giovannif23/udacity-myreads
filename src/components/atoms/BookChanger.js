@@ -37,7 +37,6 @@ const BookChangerWrap = styled.div`
 
 class BookChanger extends Component {
   state = {
-    book: '',
     shelf: ''
   }
 
@@ -49,20 +48,18 @@ class BookChanger extends Component {
   componentDidMount() {
     if (this.props.book) {
       this.setState({
-        book: this.props.book,
         shelf: this.props.book.shelf
       })
     }
   }
 
   changeHandler(book, shelf) {
-    this.props.onSelect(shelf)
     BooksAPI.update(book, shelf)
       .then((res) => {
-        this.setState({
-          book: book,
-          shelf: shelf
-        })
+        this.setState({ shelf })
+      })
+      .then(() => {
+        this.props.onSelect(shelf)
       })
   }
 
@@ -70,9 +67,13 @@ class BookChanger extends Component {
     const { book } = this.props
     const { shelf } = this.state
 
+    console.log('book', book);
+    console.log('props', book.shelf);
+    console.log('state', shelf);
+
     return(
       <BookChangerWrap>
-        <select value={shelf} onChange={(event) => this.changeHandler(book, event.target.value)}>
+        <select value={shelf ? shelf : 'none'} onChange={(event) => this.changeHandler(book, event.target.value)}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>

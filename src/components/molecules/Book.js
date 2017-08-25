@@ -15,25 +15,14 @@ class Book extends Component {
     onSelect: PropTypes.func
   }
 
-  componentDidMount() {
-    if (this.props.book) {
-      this.setState({ shelf: this.props.book.shelf })
-
-      if (this.props.book.imageLinks && this.props.book.imageLinks.thumbnail) {
-        this.setState({ thumbnail: this.props.book.imageLinks.thumbnail })
-      }
-    }
-  }
-
   render() {
     const { book, onSelect } = this.props
-    const { thumbnail } = this.state
 
     return(
       <li>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail ? thumbnail : ''})` }}></div>
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})` }}></div>
             <BookChanger onSelect={onSelect} book={book} />
           </div>
           <div className="book-title">{book.title}</div>
