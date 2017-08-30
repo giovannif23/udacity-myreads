@@ -40,12 +40,6 @@ class BookChanger extends Component {
     shelf: ''
   }
 
-  static propTypes = {
-    book: PropTypes.object.isRequired,
-    onSelect: PropTypes.func,
-    currentShelf: PropTypes.string
-  }
-
   componentDidMount() {
     if (this.props.currentShelf) {
       this.setState({
@@ -58,27 +52,14 @@ class BookChanger extends Component {
     }
   }
 
-  changeHandler(book, shelf) {
-    BooksAPI.update(book, shelf)
-      .then((res) => {
-        this.setState({ shelf })
-      })
-      .then(() => {
-        if(this.props.onSelect) {
-          this.props.onSelect(shelf)
-        }
-      })
-  }
-
   render() {
-    const { book, currentShelf } = this.props
+    const { book, currentShelf, onSelect } = this.props
     const { shelf } = this.state
-
     const selectedValue = currentShelf ? currentShelf : (shelf ? shelf : 'none');
 
     return(
       <BookChangerWrap>
-        <select value={selectedValue} onChange={(event) => this.changeHandler(book, event.target.value)}>
+        <select value={selectedValue} onChange={(event) => onSelect(book, event.target.value)}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
@@ -87,6 +68,12 @@ class BookChanger extends Component {
         </select>
       </BookChangerWrap>
     )
+  }
+
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    onSelect: PropTypes.func,
+    currentShelf: PropTypes.string
   }
 }
 

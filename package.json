@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
+    "lodash": "^4.17.4",
     "polished": "^1.4.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",

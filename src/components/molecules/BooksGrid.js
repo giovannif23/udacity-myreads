@@ -18,13 +18,6 @@ const BooksGridWrap = styled.ol`
 `
 
 class BooksGrid extends Component {
-  static propTypes = {
-    books: PropTypes.array,
-    filter: PropTypes.string,
-    onSelect: PropTypes.func,
-    showShelf: PropTypes.bool
-  }
-
   render() {
     let { books, filter, onSelect, showShelf } = this.props
 
@@ -39,6 +32,13 @@ class BooksGrid extends Component {
         ))}
       </BooksGridWrap>
     )
+  }
+
+  static propTypes = {
+    books: PropTypes.array,
+    filter: PropTypes.string,
+    onSelect: PropTypes.func,
+    showShelf: PropTypes.bool
   }
 }
 

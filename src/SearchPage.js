@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BooksGrid from './components/molecules/BooksGrid'
 import * as BooksAPI from './BooksAPI'
+import debounce from 'lodash/debounce'
 
 class SearchPage extends Component {
   state = {
@@ -9,12 +10,11 @@ class SearchPage extends Component {
     books: []
   }
 
-  updateQuery = (query) => {
-    this.setState({
-      query: query,
-      books: []
-    })
+  componentWillMount() {
+    this.updateQuery
+  }
 
+  debouncedQuery = debounce((query) => {
     if (query) {
       BooksAPI.search(query)
       .then((books) => {
@@ -22,7 +22,34 @@ class SearchPage extends Component {
           this.setState({ books })
         }
       })
+    } else {
+      this.setState({
+        books: []
+      })
     }
+  }, 500)
+
+  updateQuery = (query) => {
+    this.setState({
+      query
+    })
+    this.debouncedQuery(query)
+  }
+
+  refreshBookState = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        BooksAPI.get(book.id)
+          .then((book) => {
+            this.state.books.forEach((b, index) => {
+              if (b.id === book.id ) {
+                const books = this.state.books;
+                books[index].shelf = shelf
+                this.setState({ books })
+              }
+            })
+          })
+        })
   }
 
   render() {
@@ -38,11 +65,10 @@ class SearchPage extends Component {
               placeholder="Search by title or author"
               value={query}
               onChange={(event) => this.updateQuery(event.target.value)} />
-
           </div>
         </div>
         <div className="search-books-results">
-          <BooksGrid showShelf={true} books={books}></BooksGrid>
+          <BooksGrid onSelect={this.refreshBookState} showShelf={true} books={books}></BooksGrid>
         </div>
       </div>
     )
