@@ -19,14 +19,17 @@ const BookCover = styled.div`
 `
 
 class Book extends Component {
-  state = {
-    thumbnail: '',
-    book: {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      thumbnail: '',
+      book: props.book
+    }
   }
 
   componentDidMount() {
     BooksAPI.get(this.props.book.id).then((book) => {
-      this.setState({ book })
+      this.setState({ book: book })
     })
   }
 

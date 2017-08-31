@@ -45,7 +45,8 @@ class SearchPage extends Component {
               if (b.id === book.id ) {
                 const books = this.state.books;
                 books[index].shelf = shelf
-                this.setState({ books })
+                this.forceUpdate();
+                //this.setState({ books[index].shelf = shelf })
               }
             })
           })

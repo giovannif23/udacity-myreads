@@ -18,8 +18,20 @@ const BooksGridWrap = styled.ol`
 `
 
 class BooksGrid extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: props.books
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ books: nextProps.books })
+  }
+
   render() {
-    let { books, filter, onSelect, showShelf } = this.props
+    let { filter, onSelect, showShelf } = this.props
+    let { books } = this.state
 
     if (filter) {
       books = books.filter((book) => book.shelf === filter)
